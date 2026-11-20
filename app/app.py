@@ -3,8 +3,10 @@ import os, time, re
 import psycopg2
 
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "devsecret")
 
 DB = {
@@ -150,7 +152,7 @@ def security_info():
         }
     })
 
+init_db()
 
 if __name__ == "__main__":
-    init_db()
     app.run(host="0.0.0.0", port=8080)
